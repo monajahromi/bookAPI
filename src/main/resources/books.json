@@ -1,0 +1,25 @@
+ [
+        {
+        	"id" : "1",
+            "title": "Agile Web Development with Rails",
+            "author": "Sam Ruby, Dave Thomas, David Heinemeier Hansson",
+            "author_firstname": null,
+            "author_lastname": "",
+            "author_middlename": "",
+            "categories": "Web development",
+            "volume": "",
+            "year": "2010",
+            "edition": "Fourth Edition",
+            "language": "en",
+            "extension": "pdf",
+            "pages": "472",
+            "filesize": "6937523",
+            "md5": "AE49D9BB94118632DF0691DF18706319",
+            "series": "",
+            "periodical": "",
+            "file_extension": "pdf",
+            "url": "http://bookzz.org/dl/1159142/643c75",
+            "description": "",
+            "cover": "http://libgen.org/covers/721000/ae49d9bb94118632df0691df18706319-g.jpg"
+          }
+]
