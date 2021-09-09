@@ -1,4 +1,4 @@
-package mellat.ir.card;
+package com.bookstore;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,43 +10,37 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
+import com.bookstore.model.Book;
+import com.bookstore.service.BookService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
-import mellat.ir.card.model.Book;
-import mellat.ir.card.service.BookService;
-
 @SpringBootApplication
-public class CardApplication extends SpringBootServletInitializer{
+public class Application extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication.run(CardApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean
 	CommandLineRunner runner(BookService bookService) {
 		return args -> {
+			
 			// read json and write to db
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-			//mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-			//mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			TypeReference<List<Book>> typeReference = new TypeReference<List<Book>>(){};
-			//File file = new File(getClass().getResource("jsonschema.json").getFile());
-			//mapper.readValue(file, Book.class);
 			InputStream inputStream = TypeReference.class.getResourceAsStream("/books.json");
 			
-			System.out.println("inputStream : " + inputStream);
+			
 			
 			try {
-//				Collection<Book> readValues = new ObjectMapper().readValue(
-//					    jsonAsString, new TypeReference<Collection<COrder>>() { }
-//					);
+					
 				List<Book> books = mapper.readValue(inputStream,typeReference);
-				//System.out.println("book : " + books.ge.toString());
+				
 				bookService.saveAll(books);
-				System.out.println("books Saved!");
+				System.out.println("books have been read from json and saved to H2 database successfully!");
 			} catch (IOException e){
 				System.out.println("Unable to save books: " + e.getMessage());
 			}
