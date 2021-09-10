@@ -34,15 +34,20 @@ public class BookService {
 	
 	public List<Book> SearchByTerms(String searchTerm) {
 
-		List<Book> list1 =  bookRepository.findByTitleContainingIgnoreCase(searchTerm);
+		
+		/* one approach  search columns for spacefic word we can search each column separately and then join them together  :
+		 * List<Book> list1 =  bookRepository.findByTitleContainingIgnoreCase(searchTerm);
 		List<Book> list2 =  bookRepository.findByAuthorsContainingIgnoreCase(searchTerm);
 		List<Book> list3 =  bookRepository.findByCategoriesContainingIgnoreCase(searchTerm);
 		
 		List<Book> newList = Stream.of(list1, list2, list3)
 								.flatMap(Collection::stream)
 								.collect(Collectors.toList());
+		*/
 		
-		return newList ; 
+		
+		//another approache which I chose is to search all three colnum for search term and use OR for joining result
+		return bookRepository.findByTitleContainingIgnoreCaseOrAuthorsContainingIgnoreCaseOrCategoriesContainingIgnoreCase (searchTerm ,searchTerm, searchTerm); 
                 
 	}
 	

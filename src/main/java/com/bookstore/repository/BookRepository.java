@@ -15,6 +15,7 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
 	ArrayList<Book> findByAuthorsContainingIgnoreCase(String authors);
 	ArrayList<Book> findByCategoriesContainingIgnoreCase(String categories);
 	
+	ArrayList<Book> findByTitleContainingIgnoreCaseOrAuthorsContainingIgnoreCaseOrCategoriesContainingIgnoreCase(String title ,String author, String category);
 	
 	
 
